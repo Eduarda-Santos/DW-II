@@ -12,14 +12,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+class aluno {
+    
+    // define um atributo com array inicial e dados
+    public $aluno = [[
+        'matricula' => 1,
+        'nome'  => 'Carlos Eduardo',
+        'nota' => '5',
+    ]];
+}
+
 Route::get('/aluno', function () {
-    $dados = [["nome" => "Carlos Eduardo"],
-        ["nome" => "Maria Claudia"],
-        ["nome" => "João Pedro"],
-        ["nome" => "Artur Amorim"],
-        ["nome" => "Thomas Zambujal"],
-        
-    ];
 
     $aluno = "<ul>";
     
