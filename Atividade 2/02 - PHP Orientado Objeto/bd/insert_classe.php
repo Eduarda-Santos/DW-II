@@ -2,10 +2,10 @@
 
     class BD {
 
-        $DB_NOME = "dwii";
-        $DB_USUARIO = "localhost";
-        $DB_SENHA = "duda2526";
-        $DB_CHARSET = "utf8";
+        private $DB_NOME = "dwii";
+        private $DB_USUARIO = "localhost";
+        private $DB_SENHA = "";
+        private $DB_CHARSET = "utf8";
 
         public function connection() {
             $str_conn = "mysql:host=localhost;dbname=".$this->DB_NOME;
@@ -16,7 +16,7 @@
 
         public function select() {
             $conn = $this->connection();
-    		$stmt = $conn->prepare("SELECT * FROM tb_pessoas LIMIT 3");
+    		$stmt = $conn->prepare("SELECT * FROM tb_alunos LIMIT 3");
             $stmt->execute();
 
             return $stmt;
@@ -24,7 +24,7 @@
 
         public function insert($dados) {
 
-            $sql = "INSERT INTO tb_pessoas(nome, endereco, telefone) VALUES(";
+            $sql = "INSERT INTO tb_cursos(nome, sigla, tempo) VALUES(";
 
             $flag = 0;
             foreach($dados as $campo => $valor) {
@@ -40,19 +40,19 @@
     		$stmt = $conn->prepare($sql);
             $stmt->execute();
 
-            return $conn->lastInsertCPF();
+            return $conn->lastInsertId();
         }
     }
 
-    $pessoa = array("nome" => "João Silva",
-            "endereco" => "Salvador",
-            "tempo" => 871635423);
+    $curso = array("nome" => "Técnico em Mecânica",
+            "sigla" => "MEC",
+            "tempo" => 4);
 
     $obj = new BD();
-    $CPF = $obj->insert($pessoa);
+    $id = $obj->insert($curso);
 
-    if($CPF != 0) {
-        echo "INSERIDO COM SUCESSO (". $CPF .")!";
+    if($id != 0) {
+        echo "INSERIDO COM SUCESSO (". $id .")!";
     }
 
 ?>
